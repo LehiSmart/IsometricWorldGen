@@ -6,15 +6,15 @@ A procedural isometric map generator built in **Godot 4** using the **Wave Funct
 
 ## Features
 
-- **Wave Function Collapse terrain** — tiles are collapsed by lowest entropy, with constraint propagation via a BFS queue so neighbouring tiles always obey the adjacency rules.
-- **Weighted tile selection** — each terrain type has a weight (e.g. grass is far more common than flower grass or stone), so you can tune the look of the world without touching the rules.
-- **Procedural river** — a river is seeded *before* WFC runs. It starts and ends on two different map edges and meanders using velocity inertia, a pull towards the exit point, and random perpendicular drift. WFC then fills the land around it, so the banks (shore stone and dirt) form naturally.
-- **Fake height with layered tilemaps** — grass and cliffs are drawn on raised layers with a vertical offset over a dirt base, giving the blocky isometric "elevation" look.
-- **Shadow pass** — raised tiles cast a one-tile shadow onto neighbouring dirt, shallow water and shore tiles.
-- **Decorations** — random logs on grass, rocks on cliffs, and animated/instanced plant scenes scattered across the meadows.
-- **Contradiction recovery** — if WFC ever reaches a cell with no valid tiles, generation restarts automatically with a fresh seed.
-- **Fresh result every time** — uses a dedicated `RandomNumberGenerator` that is re-randomised on every run.
-- **Pan and zoom camera** — drag with the middle or right mouse button, scroll to zoom towards the cursor.
+- **Wave Function Collapse terrain** - tiles are collapsed by lowest entropy, with constraint propagation via a BFS queue so neighbouring tiles always obey the adjacency rules.
+- **Weighted tile selection** - each terrain type has a weight (e.g. grass is far more common than flower grass or stone), so you can tune the look of the world without touching the rules.
+- **Procedural river** - a river is seeded *before* WFC runs. It starts and ends on two different map edges and meanders using velocity inertia, a pull towards the exit point, and random perpendicular drift. WFC then fills the land around it, so the banks (shore stone and dirt) form naturally.
+- **Fake height with layered tilemaps** - grass and cliffs are drawn on raised layers with a vertical offset over a dirt base, giving the blocky isometric "elevation" look.
+- **Shadow pass** - raised tiles cast a one-tile shadow onto neighbouring dirt, shallow water and shore tiles.
+- **Decorations** - random logs on grass, rocks on cliffs, and animated/instanced plant scenes scattered across the meadows.
+- **Contradiction recovery** - if WFC ever reaches a cell with no valid tiles, generation restarts automatically with a fresh seed.
+- **Fresh result every time** - uses a dedicated `RandomNumberGenerator` that is re-randomised on every run.
+- **Pan and zoom camera** - drag with the middle or right mouse button, scroll to zoom towards the cursor.
 
 ---
 
@@ -92,9 +92,9 @@ Select the root node of `world_generator.tscn` and tweak these in the Inspector:
 
 For deeper tuning, edit the constants at the top of `Scripts/world_generation.gd`:
 
-- `TILE_WEIGHTS` — how common each terrain type is
-- `adjacency_rules` (in `define_adjacency_rules()`) — which tiles may touch
-- `TILE_ATLAS_MAP` — which spritesheet cells represent each terrain type
+- `TILE_WEIGHTS` - how common each terrain type is
+- `adjacency_rules` (in `define_adjacency_rules()`) - which tiles may touch
+- `TILE_ATLAS_MAP` - which spritesheet cells represent each terrain type
 - Decoration chances in `render_grid()` (4% logs, 12% plants, 8% cliff rocks)
 
 ---
@@ -123,7 +123,7 @@ Tiles are 32×16 isometric diamonds (`tile_shape = isometric`) cut from a 32×32
 - **No backtracking.** On a contradiction the whole map is regenerated rather than repairing the local area. This is fine at 80×80 with the current rules but could get slow on larger or stricter rule sets.
 - **Rules are tile-type level, not edge-level.** Adjacency is defined between terrain categories rather than matching sprite edges, so transitions rely on the art being tileable.
 - **Entropy is a simple candidate count**, not weighted Shannon entropy, and the lowest-entropy search scans the whole grid each step.
-- **Terrain is blocky and noisy** — grass and dirt patches are fine-grained rather than forming large biomes. Larger-scale structure (e.g. a noise-driven biome pass feeding WFC) is a possible future improvement.
+- **Terrain is blocky and noisy** - grass and dirt patches are fine-grained rather than forming large biomes. Larger-scale structure (e.g. a noise-driven biome pass feeding WFC) is a possible future improvement.
 
 ## Ideas for Future Work
 
@@ -139,8 +139,8 @@ Tiles are 32×16 isometric diamonds (`tile_shape = isometric`) cut from a 32×32
 
 - Built with [Godot Engine](https://godotengine.org/)
 - Tile art: *add the spritesheet's author and licence here*
-- Wave Function Collapse by Maxim Gumin — [mxgmn/WaveFunctionCollapse](https://github.com/mxgmn/WaveFunctionCollapse)
+- Wave Function Collapse by Maxim Gumin - [mxgmn/WaveFunctionCollapse](https://github.com/mxgmn/WaveFunctionCollapse)
 
 ## Author
 
-**Lehi Smart** — [GitHub](https://github.com/) · [LinkedIn](https://www.linkedin.com/)
+**Lehi Smart** - [GitHub](https://github.com/) · [LinkedIn](https://www.linkedin.com/)
